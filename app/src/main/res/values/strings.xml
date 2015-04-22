@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Transmissampa</string>
+
+    <string name="title_activity_start">StartActivity</string>
+    <string name="textview_sign_in">Sign in with e-mail!</string>
+    <string name="title_activity_sign_in">SignInActivity</string>
+    <string name="action_logout">Logout</string>
+    <string name="textview_login">Already have an account? Log in.</string>
+    <string name="title_activity_log_in">LogInActivity</string>
+
+    <string name="username">username</string>
+    <string name="password">password</string>
+    <string name="name">name</string>
+    <string name="email">e-mail</string>
+    <string name="confirm_password">confirm password</string>
+    <string name="agree_terms_conditions">Agree with terms and conditions.</string>
+    <string name="sign_in">Sign In</string>
+    <string name="login">Login</string>
+    <string name="progress_login_title">Please wait ...</string>
+    <string name="progress_login_text">Trying to login</string>
+    <string name="progress_sing_in_title">Please wait...</string>
+    <string name="progress_sing_in_text">Trying to sign in</string>
+    <string name="title_activity_add_event">Add Event</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+</resources>

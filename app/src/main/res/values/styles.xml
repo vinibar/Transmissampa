@@ -1,0 +1,16 @@
+<resources>
+    <style name="AppTheme" parent="@style/Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <!-- Set AppCompat’s color theming attrs -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/dark_primary</item>
+        <item name="android:textColorPrimary">@color/primary_text</item>
+        <item name="android:textColorSecondary">@color/secondary_text</item>
+        <item name="android:divider">@color/divider</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+    <style name="float_label_text">
+        <item name="android:textColor">@color/secondary_text</item>
+    </style>
+</resources>
