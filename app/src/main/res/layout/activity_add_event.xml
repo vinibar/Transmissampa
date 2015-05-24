@@ -1,9 +1,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
-                xmlns:float="http://schemas.android.com/apk/res-auto"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context="me.biuti.transmissampa.controller.AddEventActivity">
+                tools:context="me.biuti.transmissampa.ui.Activities.AddEventActivity"
+                android:id="@+id/addEventLayout">
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
@@ -13,66 +15,90 @@
         android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:background="@color/primary">
+        android:background="@color/primary"
+        android:padding="5dp">
 
-        <com.wrapp.floatlabelededittext.FloatLabeledEditText
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="50dp"
-            float:fletTextAppearance="@style/float_label_text">
-            <EditText
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:hint="Title"
-                android:id="@+id/etTitle"
-                android:textColor="@color/text"
-                android:textColorHint="#ccffffff"
-                android:textColorHighlight="#ffffffff"
-                android:textSize="30dp"/>
-        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+            android:text="#"
+            android:id="@+id/tvHash"
+            android:textColor="@color/text"
+            android:textSize="40dp"/>
 
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Title"
+            android:id="@+id/etTitle"
+            android:textColor="@color/text"
+            android:textColorHint="#ccffffff"
+            android:textColorHighlight="#ffffffff"
+            android:textSize="40dp"
+            android:layout_weight="1"
+            android:singleLine="false"
+            android:textIsSelectable="false"
+            android:elegantTextHeight="false"
+            android:autoText="false"
+            android:gravity="top"
+            android:inputType="textAutoComplete"/>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/body"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="2dp"
         android:layout_below="@id/header"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <android.support.v7.widget.CardView
+            android:id="@+id/cvSectionA"
+            card_view:cardElevation="2dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:layout_marginLeft="25dp"
-            android:id="@+id/tvDescription"
-            android:text="Description"
-            android:labelFor="@+id/etDescription"
-            android:textStyle="bold"
-            android:textColor="@color/secondary_text"/>
+            card_view:cardMaxElevation="8dp"
+            card_view:contentPadding="2dp"
+            card_view:cardCornerRadius="0dp"
+            android:layout_centerHorizontal="true"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvDescription"
+                android:text="Description"
+                android:labelFor="@+id/etDescription"
+                android:textStyle="bold"
+                android:textColor="@color/primary"
+                android:layout_marginLeft="2dp"
+                android:textSize="@dimen/abc_text_size_subtitle_material_toolbar"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="25dp"
-            android:layout_marginLeft="25dp"
             android:inputType="textMultiLine"
             android:id="@+id/etDescription"
-            android:maxLength="120"/>
+            android:maxLength="120"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="18dp"
+            android:importantForAccessibility="yes"
+            android:nestedScrollingEnabled="false"
+            android:gravity="top|left"/>
+
+        </android.support.v7.widget.CardView>
 
     </LinearLayout>
 
-
-    <ImageButton
+    <com.rey.material.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/btnAdd"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="-32dp"
         android:layout_marginRight="@dimen/fab_button_margin_right"
+        android:layout_marginBottom="-32dp"
         android:layout_alignBottom="@id/header"
-        android:background="@drawable/fab_shape"
-        android:src="@drawable/fab_ic_video"
-        android:tint="@android:color/white"/>
+        app:fab_backgroundColor="@color/accent"
+        app:rd_enable="true"
+        app:fab_iconSrc="@drawable/fab_ic_video"/>
 
 </RelativeLayout>

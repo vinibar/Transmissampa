@@ -5,6 +5,7 @@
     <color name="light_primary">#B2DFDB</color>
     <color name="text">#FFFFFF</color>
     <color name="accent">#FF4081</color>
+    <color name="ripple">#FFFFFF</color>
     <color name="button_pressed">#F8BBD0</color>
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#727272</color>

@@ -1,9 +1,9 @@
-package me.biuti.transmissampa.controller;
+package me.biuti.transmissampa.ui.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +25,7 @@ public class LogInActivity extends ActionBarActivity {
 
     public static final String TAG = LogInActivity.class.getSimpleName();
 
+    @InjectView(R.id.toolbar) Toolbar mToolbar;
     @InjectView(R.id.etUsername) EditText mUserName;
     @InjectView(R.id.etPassword) EditText mPassword;
     @InjectView(R.id.btnLogIn) Button mButton;
@@ -36,9 +37,8 @@ public class LogInActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
         ButterKnife.inject(this);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(getString(R.string.login));
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle(getString(R.string.title_activity_log_in));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
@@ -60,8 +60,7 @@ public class LogInActivity extends ActionBarActivity {
                             if (user != null) {
                                 mUser = new User(user);
                                 Intent intent = new Intent(LogInActivity.this, MainActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                             } else {
                                 Log.e(TAG, e.getMessage());

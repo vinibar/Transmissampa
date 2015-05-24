@@ -1,9 +1,10 @@
-package me.biuti.transmissampa;
+package me.biuti.transmissampa.core;
 
 import android.app.Application;
 
 import com.parse.Parse;
-import com.parse.ParseObject;
+
+import me.biuti.transmissampa.util.ParseHashKeys;
 
 /**
  * Created by vinibar on 4/16/15.

@@ -1,20 +1,19 @@
-package me.biuti.transmissampa.controller;
+package me.biuti.transmissampa.ui.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
+import com.rey.material.widget.Button;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -27,12 +26,12 @@ public class SignInActivity extends ActionBarActivity {
 
     public static final String TAG = SignInActivity.class.getSimpleName();
 
+    @InjectView(R.id.toolbar) Toolbar mToolbar;
     @InjectView(R.id.etName) EditText mName;
     @InjectView(R.id.etEmail) EditText mEmail;
     @InjectView(R.id.etUsername) EditText mUsername;
     @InjectView(R.id.etPassword) EditText mPassword;
     @InjectView(R.id.etConfirmPassword) EditText mConfirmPassword;
-    @InjectView(R.id.checkBox) CheckBox mCheckbox;
     @InjectView(R.id.btnSignIn) Button mButton;
 
     @Override
@@ -40,9 +39,8 @@ public class SignInActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
         ButterKnife.inject(this);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Sign in");
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle(getString(R.string.title_activity_sign_in));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
@@ -64,12 +62,11 @@ public class SignInActivity extends ActionBarActivity {
                 public void done(ParseException e) {
                     if (e == null) {
                         Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         Log.d(TAG, "Sign in successful (parse.com)");
                     } else {
-                        Log.e(TAG, "SIgn in error (parse.com)");
+                        Log.e(TAG, "Sign in error (parse.com)");
                         Toast.makeText(SignInActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                     progressDialog.dismiss();
@@ -101,9 +98,6 @@ public class SignInActivity extends ActionBarActivity {
         }else if(!mPassword.getText().toString().equals(mConfirmPassword.getText().toString())){
             mPassword.setError("Password fields must match");
             mConfirmPassword.setError("Password fields must match");
-            isCorrect = false;
-        }else if(!mCheckbox.isChecked()){
-            mCheckbox.setError("You need to agree with our terms and conditions");
             isCorrect = false;
         }
         return isCorrect;

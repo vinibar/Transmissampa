@@ -1,19 +1,15 @@
 package me.biuti.transmissampa.model;
 
-import android.content.Intent;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.widget.EditText;
 
-import com.parse.ParseException;
 import com.parse.ParseUser;
-import com.parse.SignUpCallback;
-
-import me.biuti.transmissampa.controller.MainActivity;
-import me.biuti.transmissampa.controller.SignInActivity;
 
 /**
  * Created by vinibar on 4/16/15.
  */
-public class User {
+public class User implements Parcelable {
 
     private String mName;
     private String mEmail;
@@ -90,4 +86,39 @@ public class User {
         return mParseUser;
     }
 
+
+    protected User(Parcel in) {
+        mName = in.readString();
+        mEmail = in.readString();
+        mUsername = in.readString();
+        mPassword = in.readString();
+        //mParseUser = (ParseUser) in.readValue(ParseUser.class.getClassLoader());
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mName);
+        dest.writeString(mEmail);
+        dest.writeString(mUsername);
+        dest.writeString(mPassword);
+        //dest.writeValue(mParseUser);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 }

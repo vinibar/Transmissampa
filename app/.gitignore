@@ -1,3 +1,4 @@
 /build
 
 src/main/java/me/biuti/transmissampa/ParseHashKeys.java
+src/main/java/me/biuti/transmissampa/util/WowzaKeys.java
