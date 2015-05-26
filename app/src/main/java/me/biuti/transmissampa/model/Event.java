@@ -13,13 +13,25 @@ import com.parse.ParseUser;
  */
 public class Event implements Parcelable {
 
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Event> CREATOR = new Parcelable.Creator<Event>() {
+        @Override
+        public Event createFromParcel(Parcel in) {
+            return new Event(in);
+        }
+
+        @Override
+        public Event[] newArray(int size) {
+            return new Event[size];
+        }
+    };
+    private static ParseObject mParseEvent;
+    private static Event[] mEvents;
     private String mTitle;
     private String mDescription;
     private User mUser;
-    private static ParseObject mParseEvent;
-    private static Event[] mEvents;
 
-    public Event(String title, String description, ParseUser user){
+    public Event(String title, String description, ParseUser user) {
         mTitle = title;
         mDescription = description;
         mUser = new User(user);
@@ -27,7 +39,7 @@ public class Event implements Parcelable {
         setParses();
     }
 
-    public Event(ParseObject parseEvent){
+    public Event(ParseObject parseEvent) {
         mParseEvent = parseEvent;
         mTitle = mParseEvent.getString("eventTitle");
         mDescription = mParseEvent.getString("eventDescription");
@@ -37,6 +49,21 @@ public class Event implements Parcelable {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+
+    protected Event(Parcel in) {
+        mTitle = in.readString();
+        mDescription = in.readString();
+        mUser = (User) in.readValue(User.class.getClassLoader());
+        //mParseEvent = (ParseObject) in.readValue(ParseObject.class.getClassLoader());
+    }
+
+    public static Event[] getmEvents() {
+        return mEvents;
+    }
+
+    public static void setmEvents(Event[] mEvents) {
+        Event.mEvents = mEvents;
     }
 
     public String getTitle() {
@@ -63,34 +90,17 @@ public class Event implements Parcelable {
         mUser = user;
     }
 
-    public static Event[] getmEvents() {
-        return mEvents;
-    }
-
-    public static void setmEvents(Event[] mEvents) {
-        Event.mEvents = mEvents;
-    }
-
-    public void setParses(){
-        if(mParseEvent == null){
-            mParseEvent = new ParseObject("Event");
-        }
+    public void setParses() {
+        mParseEvent = new ParseObject("Event");
         mParseEvent.put("eventTitle", mTitle);
         mParseEvent.put("eventDescription", mDescription);
         ParseRelation<ParseUser> createdBy = mParseEvent.getRelation("createdBy");
         createdBy.add(mUser.getParseUser());
     }
 
-    public ParseObject getParseEvent(){
+    public ParseObject getParseEvent() {
 
         return mParseEvent;
-    }
-
-    protected Event(Parcel in) {
-        mTitle = in.readString();
-        mDescription = in.readString();
-        mUser = (User) in.readValue(User.class.getClassLoader());
-        //mParseEvent = (ParseObject) in.readValue(ParseObject.class.getClassLoader());
     }
 
     @Override
@@ -105,17 +115,4 @@ public class Event implements Parcelable {
         dest.writeValue(mUser);
         //dest.writeValue(mParseEvent);
     }
-
-    @SuppressWarnings("unused")
-    public static final Parcelable.Creator<Event> CREATOR = new Parcelable.Creator<Event>() {
-        @Override
-        public Event createFromParcel(Parcel in) {
-            return new Event(in);
-        }
-
-        @Override
-        public Event[] newArray(int size) {
-            return new Event[size];
-        }
-    };
 }

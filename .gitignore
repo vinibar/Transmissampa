@@ -5,5 +5,5 @@
 .DS_Store
 /build
 
-app/src/main/java/me/biuti/transmissampa/ParseHashKeys.java
+app/src/main/java/me/biuti/transmissampa/util/ParseHashKeys.java
 app/src/main/java/me/biuti/transmissampa/util/WowzaKeys.java

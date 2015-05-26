@@ -24,10 +24,14 @@ import me.biuti.transmissampa.model.Event;
 public class AddEventActivity extends ActionBarActivity {
 
     private static final String TAG = AddEventActivity.class.getSimpleName();
-    @InjectView(R.id.toolbar) Toolbar mToolbar;
-    @InjectView(R.id.btnAdd) FloatingActionButton mBtnAdd;
-    @InjectView(R.id.etTitle) EditText mTitle;
-    @InjectView(R.id.etDescription) EditText mDescription;
+    @InjectView(R.id.toolbar)
+    Toolbar mToolbar;
+    @InjectView(R.id.btnAdd)
+    FloatingActionButton mBtnAdd;
+    @InjectView(R.id.etTitle)
+    EditText mTitle;
+    @InjectView(R.id.etDescription)
+    EditText mDescription;
     private Event mEvent;
     private Broadcast mBroadcast;
 
@@ -44,46 +48,47 @@ public class AddEventActivity extends ActionBarActivity {
     }
 
     @OnClick(R.id.btnAdd)
-    void addEvent(View view){
+    void addEvent(View view) {
 
 
-          final ProgressDialog progressDialog = ProgressDialog.show(
-                  this,
-                  "Please wait",
-                  "Creating event...",
-                  true);
+        final ProgressDialog progressDialog = ProgressDialog.show(
+                this,
+                "Please wait",
+                "Creating event...",
+                true);
 
 
-          mEvent = new Event(mTitle.getText().toString(),
-                  mDescription.getText().toString(),
-                  ParseUser.getCurrentUser());
+        mEvent = new Event(mTitle.getText().toString(),
+                mDescription.getText().toString(),
+                ParseUser.getCurrentUser());
 
-          mEvent.getParseEvent().saveInBackground(new SaveCallback() {
-              @Override
-              public void done(ParseException e) {
-                  if (e == null) {
+        mEvent.getParseEvent().saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
 
-                      progressDialog.setMessage("Starting broadcast...");
-                      mBroadcast = new Broadcast(mEvent, ParseUser.getCurrentUser());
-                      mBroadcast.getParseBroadcast().saveInBackground(new SaveCallback() {
-                          @Override
-                          public void done(ParseException e) {
-                              if(e==null){
-                                  Intent intent = new Intent(AddEventActivity.this, BroadcastActivity.class);
-                                  intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                  startActivity(intent);
-                              }else{
-                                  Toast.makeText(AddEventActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                              }
-                          }
-                      });
+                    progressDialog.setMessage("Starting broadcast...");
+                    mBroadcast = new Broadcast(mEvent, ParseUser.getCurrentUser());
+                    mBroadcast.getParseBroadcast().saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if (e == null) {
+                                Intent intent = new Intent(AddEventActivity.this, BroadcastActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                intent.putExtra("BROADCAST", mBroadcast);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(AddEventActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
 
-                  } else {
-                      Toast.makeText(AddEventActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                  }
-                  progressDialog.dismiss();
-              }
-          });
+                } else {
+                    Toast.makeText(AddEventActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+                progressDialog.dismiss();
+            }
+        });
 
     }
 

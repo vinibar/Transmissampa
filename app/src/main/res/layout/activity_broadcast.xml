@@ -1,11 +1,22 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:background="@android:color/black"
-                tools:context="me.biuti.transmissampa.ui.Activities.BroadcastActivity">>
+<RelativeLayout
+    android:id="@+id/surface_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true"
+    android:background="@android:color/black">
+
+
+    <com.rey.material.widget.ProgressView
+        android:id="@id/progress_circular"
+        android:layout_width="48dip"
+        android:layout_height="48dip"
+        android:layout_centerInParent="true"
+        app:pv_autostart="true"
+        app:pv_circular="true"/>
+
 
     <net.majorkernelpanic.streaming.gl.SurfaceView
         android:id="@+id/surface"
