@@ -14,6 +14,6 @@ public class TransmissampaApplication extends Application{
     public void onCreate() {
         super.onCreate();
         Parse.enableLocalDatastore(this);
-        Parse.initialize(this, ParseHashKeys.KEY1, ParseHashKeys.KEY2);
+        Parse.initialize(this, ParseHashKeys.APPLICATION_ID, ParseHashKeys.CLIENT_KEY);
     }
 }
